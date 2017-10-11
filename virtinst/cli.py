@@ -1190,7 +1190,7 @@ class VirtCLIParser(object):
         passed an invalid argument such as --disk idontexist=foo
         """
         if optdict:
-            fail(_("Unknown options %s") % optdict.keys())
+            fail(_("Unknown options %s") % list(optdict.keys()))
 
     def _parse(self, inst):
         """
@@ -1639,7 +1639,7 @@ class ParserBoot(VirtCLIParser):
     def _parse(self, inst):
         # Build boot order
         boot_order = []
-        for cliname in self.optdict.keys():
+        for cliname in list(self.optdict.keys()):
             if cliname not in inst.os.BOOT_DEVICES:
                 continue
 
