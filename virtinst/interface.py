@@ -29,9 +29,6 @@ import libvirt
 from . import util
 from .xmlbuilder import XMLBuilder, XMLChildProperty, XMLProperty
 
-if sys.version_info[0] == 3:
-    unicode = str  # pylint: disable=redefined-builtin
-
 
 class _IPAddress(XMLBuilder):
     _XML_PROP_ORDER = ["address", "prefix"]
@@ -42,7 +39,7 @@ class _IPAddress(XMLBuilder):
     ######################
 
     def _validate_ipaddr(self, addr):
-        ipaddress.ip_address(unicode(addr))
+        ipaddress.ip_address(str(addr))
         return addr
 
     address = XMLProperty("./@address", validate_cb=_validate_ipaddr)
